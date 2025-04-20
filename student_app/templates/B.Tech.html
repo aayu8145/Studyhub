@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.Tech Subject Notes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'BCAstyle.css' %}"> <!-- Link to external CSS -->
+    <script defer src="BCAscript.js"></script> <!-- Link to JavaScript file -->
+	<style>
+		
+	</style>
+</head>
+<body>
+    <header>
+        <h1>B.Tech Subject Notes</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/BCAnotes">BCA(AI/ML)</a></li>
+                <li><a href="/BCA_CS">BCA(CyberSecurity)</a></li>
+                <li><a href="/BCA_DS">BCA(Data Science)</a></li>
+            </ul>
+            <input type="text" id="searchBar" placeholder="Search notes...">
+        </nav>
+    </header>
+    
+    <section class="notes-container">
+        <h2>Select a Subject</h2>
+        <ul>
+            <li><a href="#programming">Programming</a></li>
+            <li><a href="#dbms">Database Management System</a></li>
+            <li><a href="#networking">Networking</a></li>
+            <li><a href="#os">Operating System</a></li>
+            <li><a href="#software-engineering">Software Engineering</a></li>
+            <li><a href="#web-development">Web Development</a></li>
+        </ul>
+        <hr>
+        
+        <div class="note-section" id="programming">
+            <h2>Programming</h2>
+            <p>Programming is the process of writing and testing code to develop applications.</p>
+            <a href="c:\Users\Admin\Documents\programming.pdf" download>Download PDF</a>
+        </div>
+        
+        <div class="note-section" id="dbms">
+            <h2>Database Management System (DBMS)</h2>
+            <p>DBMS is software that manages databases efficiently.</p>
+            <a href="notes/dbms.pdf" download>Download PDF</a>
+        </div>
+        
+        <div class="note-section" id="networking">
+            <h2>Networking</h2>
+            <p>Networking involves communication between systems using protocols like TCP/IP.</p>
+            <a href="notes/networking.pdf" download>Download PDF</a>
+        </div>
+        
+        <div class="note-section" id="os">
+            <h2>Operating System (OS)</h2>
+            <p>An OS manages hardware and software resources in a computer.</p>
+            <a href="notes/os.pdf" download>Download PDF</a>
+        </div>
+        
+        <div class="note-section" id="software-engineering">
+            <h2>Software Engineering</h2>
+            <p>Software Engineering deals with designing, developing, and maintaining software.</p>
+            <a href="notes/software-engineering.pdf" download>Download PDF</a>
+        </div>
+        
+        <div class="note-section" id="web-development">
+            <h2>Web Development</h2>
+            <p>Web Development involves creating websites using HTML, CSS, and JavaScript.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 B.Tech Notes | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
