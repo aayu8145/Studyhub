@@ -307,7 +307,7 @@ a, button {
 .about-content .side-text {
 	width: 550px;
 	padding: 50px 40px;
-	background: #b90909;
+	background: #d5d2d2;
 	box-shadow: 2px 0 100px rgba(0,0,0,0.3);
 	border-radius: 5px;
 	text-align: justify;
@@ -325,7 +325,7 @@ a, button {
 }
 .about-content .side-text p {
 	padding: 10px;
-	background-color: #b90909;
+	background-color: #c4c2c2;
 }
 .about-content .side-image img {
 	width: 90%;

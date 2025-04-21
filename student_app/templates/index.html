@@ -8,7 +8,6 @@
 	<title>StudyHub</title>
 	<meta name="desciption" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="static/style.css">
 	<link rel="stylesheet" href="{% static 'style.css' %}">
 	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 	<script>
@@ -444,53 +443,62 @@ label[for="name"],
 		</script>
 <!-- about section -->
 <style>
-	/* Animation Keyframes */
-@keyframes fadeSlideIn {
-	0% {
+	/* Add this new style for text containers */
+	.text-container {
+		background-color: white;
+		padding: 30px;
+		border-radius: 10px;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+		margin: 20px 0;
+	}
+	
+	/* Your existing animations */
+	@keyframes fadeSlideIn {
+		0% {
+			opacity: 0;
+			transform: translateY(50px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	
+	.about-content {
+		animation: fadeSlideIn 1.5s ease-in-out forwards;
+	}
+	
+	.side-text {
+		animation: fadeSlideIn 1.5s ease-in-out forwards;
+		background-color: white; /* Added white background */
+		padding: 25px; /* Added padding */
+		border-radius: 8px; /* Rounded corners */
+	}
+	
+	.side-text h2 {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		color: #150808;
+		font-size: 30px;
+		margin-bottom: 20px;
+	}
+	
+	.side-text p {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		color: #150808;
+		font-size: 18px;
+		line-height: 1.6;
+	}
+	
+	.sideImage {
+		transform: translateX(100px);
 		opacity: 0;
-		transform: translateY(50px);
+		transition: 0.8s ease-in-out;
 	}
-	100% {
+	
+	.sideImage.visible {
+		transform: translateX(0);
 		opacity: 1;
-		transform: translateY(0);
 	}
-}
-
-/* Animation Class */
-.about-content {
-	animation: fadeSlideIn 1.5s ease-in-out forwards;
-}
-
-.side-text {
-	animation: fadeSlideIn 1.5s ease-in-out forwards;
-}
-
-.side-text h2 {
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	color: #000;
-	font-size: 30px;
-	margin-bottom: 20px;
-}
-
-.side-text p {
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	color: #333;
-	font-size: 18px;
-	line-height: 1.6;
-}
-
-.sideImage {
-	transform: translateX(100px);
-	opacity: 0;
-	transition: 0.8s ease-in-out;
-}
-
-.sideImage.visible {
-	transform: translateX(0);
-	opacity: 1;
-}
-
-
 	</style>
 	
 	
