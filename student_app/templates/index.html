@@ -445,37 +445,55 @@ label[for="name"],
 <!-- about section -->
 <style>
 	/* Animation Keyframes */
-	@keyframes fadeSlideIn {
-		0% {
-			opacity: 0;
-			transform: translateY(50px);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0);
-		}
+@keyframes fadeSlideIn {
+	0% {
+		opacity: 0;
+		transform: translateY(50px);
 	}
-	
-	/* Animation Class */
-	.about-content {
-		animation: fadeSlideIn 1.5s ease-in-out;
+	100% {
 		opacity: 1;
+		transform: translateY(0);
 	}
-	.sideImage {
-    transform: translateX(100px);
-    opacity: 0;
-    transition: 0.8s ease-in-out;
+}
+
+/* Animation Class */
+.about-content {
+	animation: fadeSlideIn 1.5s ease-in-out forwards;
+}
+
+.side-text {
+	animation: fadeSlideIn 1.5s ease-in-out forwards;
+}
+
+.side-text h2 {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: #000;
+	font-size: 30px;
+	margin-bottom: 20px;
+}
+
+.side-text p {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: #333;
+	font-size: 18px;
+	line-height: 1.6;
+}
+
+.sideImage {
+	transform: translateX(100px);
+	opacity: 0;
+	transition: 0.8s ease-in-out;
 }
 
 .sideImage.visible {
-    transform: translateX(0);
-    opacity: 1;
+	transform: translateX(0);
+	opacity: 1;
 }
 
 
 	</style>
 	
-		
+	
 </head>
 <body>
 <!-- Navigation Bar -->
@@ -587,22 +605,23 @@ label[for="name"],
 		</div>
 	</div>
 
-	
-<!-- ABOUT -->
+	<!--about us  -->
 	<div class="diffSection" id="about_section">
 		<center><p style="font-size: 50px; padding: 100px">About</p></center>
 		<div class="about-content">
-				<div class="side-image">
-					<img class="sideImage" src="https://blogking.uk/wp-content/uploads/2023/04/Distance-Learning-and-Virtual-Education-1.png" width="100px">
-				</div>
-				<div class="side-text">
-					<h2>What you think about us ?</h2>
-					<p>Education is the process of encouraging learning or the development of values, beliefs, habits, and skills. Educational tactics include instruction, training, discussion, narrative, and concentrated study.<br>An educational website can include resources such as games, movies, or topic-related tools that enhance learning and supplement in-class instruction. By making the learning process more dynamic and engaging, these websites aim to capture students' attention in today's digital world.<br>By utilizing HTML (HyperText Markup Language), CSS (Cascading Style Sheets), and JavaScript, we can create more engaging and effective learning experiences that are both accessible and fun.
-
-					</p>
-				</div>
+			<div class="side-image">
+				<img class="sideImage" src="https://blogking.uk/wp-content/uploads/2023/04/Distance-Learning-and-Virtual-Education-1.png">
+			</div>
+			<div class="side-text">
+				<h2>What you think about us?</h2>
+				<p>Education is the process of encouraging learning or the development of values, beliefs, habits, and skills. Educational tactics include instruction, training, discussion, narrative, and concentrated study.<br><br>
+					An educational website can include resources such as games, movies, or topic-related tools that enhance learning and supplement in-class instruction.<br><br>
+					By utilizing HTML, CSS, and JavaScript, we can create more engaging and effective learning experiences that are both accessible and fun.
+				</p>
+			</div>
 		</div>
 	</div>
+	
 
 
 <!-- PORTFOLIO -->
