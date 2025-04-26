@@ -1,0 +1,36 @@
+/* Admin panel background */
+body {
+    background-color: #f5f7fa;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Header ka color change */
+#header {
+    background-color: #4a90e2;
+    color: white;
+}
+
+/* Sidebar styling */
+#content-main {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+/* Buttons */
+button, input[type="submit"] {
+    background-color: #4a90e2;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #357ABD;
+}
+
+/* Table borders */
+table {
+    border: 1px solid #ddd;
+}
