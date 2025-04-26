@@ -1,36 +1,50 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 /* Admin panel background */
-body {
+body.jazzmin, body.django-admin {
     background-color: #f5f7fa;
     font-family: 'Poppins', sans-serif;
 }
 
-/* Header ka color change */
-#header {
-    background-color: #4a90e2;
-    color: white;
+/* Header styling - works for both default admin and jazzmin */
+#header, .main-header {
+    background-color: #4a90e2 !important;
+    color: white !important;
 }
 
-/* Sidebar styling */
-#content-main {
+/* Content area */
+#content, .content {
     background: white;
     border-radius: 8px;
     padding: 20px;
+    margin: 15px;
 }
 
 /* Buttons */
-button, input[type="submit"] {
-    background-color: #4a90e2;
-    border: none;
-    color: white;
-    padding: 8px 16px;
+button, input[type="submit"], .btn-primary {
+    background-color: #4a90e2 !important;
+    border: none !important;
+    color: white !important;
+    padding: 8px 16px !important;
+    border-radius: 5px !important;
+    transition: background-color 0.3s !important;
+}
+
+button:hover, input[type="submit"]:hover, .btn-primary:hover {
+    background-color: #357ABD !important;
+}
+
+/* Tables */
+table, .table {
+    border: 1px solid #ddd !important;
     border-radius: 5px;
+    overflow: hidden;
 }
 
-button:hover, input[type="submit"]:hover {
-    background-color: #357ABD;
-}
-
-/* Table borders */
-table {
-    border: 1px solid #ddd;
+/* Form fields */
+input, select, textarea {
+    border-radius: 4px !important;
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
 }
