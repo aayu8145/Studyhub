@@ -43,7 +43,7 @@ urlpatterns = [
     path('BCA_DS/', views.BCA_Data_Scince, name='BCA_DS'),
     path('BCA_CS/', views.BCA_CS, name='BCA_CS'),
     path('BCA_AIML/', views.BCA_AIML, name='BCA_AIML'),
-    path('feedback/', views.feedback_view, name='feedback'),
+    path('feedback/', views.feedback_view, name='feedbacks'),
     path('csec/', views.contact_us, name='contact_us'),
     path('search/', views.search_view, name='search'),
   
