@@ -3,8 +3,13 @@
 import os
 import sys
 from pathlib import Path
-sys.path.append(str(Path(__file__).parent))
+from dotenv import load_dotenv
 
+# Load environment variables from .env file
+load_dotenv()
+
+# Append project directory to system path
+sys.path.append(str(Path(__file__).parent))
 
 def main():
     """Run administrative tasks."""
@@ -19,8 +24,5 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
-
 if __name__ == '__main__':
     main()
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'StudyHubProject.settings')
-
