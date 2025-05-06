@@ -11,7 +11,7 @@ from student_app import views
 
 
 
-# ✅ Home Page (User Authentication Status Ke Saath)
+
 
 def home(request):
     return render(request, 'index.html')
@@ -41,7 +41,6 @@ def BCA_CS(request):
 def BCA_AIML(request):
     return render(request, 'BCA_AIML.html')
 
-# ✅ Register View (register + template fix)
 def register(request):
     if request.method == "POST":
         full_name = request.POST.get('full_name', '').strip()
@@ -66,9 +65,9 @@ def register(request):
         messages.success(request, "Registration successful! You can log in now.")
         return redirect('login')
 
-    return render(request, 'login.html')  # ✅ Same template used
+    return render(request, 'login.html')  
 
-# ✅ Login View
+
 def user_login(request):
     if request.method == "POST":
         username = request.POST.get('username', '').strip()
@@ -87,9 +86,9 @@ def user_login(request):
             messages.error(request, "Invalid password")
             return redirect('login')
 
-    return render(request, 'login.html')  # ✅ Login form shown
+    return render(request, 'login.html')  
 
-# ✅ Logout View
+
 def logout_view(request):
     if request.user.is_authenticated:
         auth_logout(request)
@@ -98,7 +97,7 @@ def logout_view(request):
     return redirect('home')
 # views.py
 from django.shortcuts import render, redirect
-from .models import Feedback  # Assuming model is Feedback
+from .models import Feedback  
 
 def feedback_view(request):
     if request.method == 'POST':
@@ -107,8 +106,8 @@ def feedback_view(request):
         email = request.POST.get('email')
         message = request.POST.get('message')
         Feedback.objects.create(name=name, course=course, email=email, message=message)
-        return redirect('/')  # or render a thank-you template
-    return render(request, 'your_template.html')  # fallback if needed
+        return redirect('/')  
+    return render(request, 'your_template.html')  
 
 def contact_us(request):
     # your logic here
@@ -141,7 +140,7 @@ def search_view(request):
         'is_search_page': True,
         'query': query,
         'results': results,
-        'all_subjects': Subject.objects.all()  # For showing available subjects
+        'all_subjects': Subject.objects.all()  
     }
     return render(request, 'BCAnotes.html', context)
 

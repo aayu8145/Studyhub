@@ -19,7 +19,9 @@ from django.urls import path
 from student_app import views
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import views as auth_views
-from django.views.generic import TemplateView  # For static homepage
+from django.views.generic import TemplateView  
+from django.urls import path, include
+
 
 
 
@@ -30,7 +32,7 @@ from django.views.generic import TemplateView  # For static homepage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='index.html'), name='home'),  # Static homepage
+    path('', TemplateView.as_view(template_name='index.html'), name='home'),  
     path('', views.home, name='home'),
     path('bTech/', views.bTech, name='bTech'),
     path('register/', views.register, name='register'),  
@@ -46,6 +48,7 @@ urlpatterns = [
     path('feedback/', views.feedback_view, name='feedback'),
     path('csec/', views.contact_us, name='contact_us'),
     path('search/', views.search_view, name='search'),
+    path('oauth/', include('social_django.urls', namespace='social')),
   
     
   
