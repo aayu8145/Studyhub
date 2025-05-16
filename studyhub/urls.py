@@ -32,8 +32,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
     path('', TemplateView.as_view(template_name='index.html'), name='home'),  
-    path('', views.home, name='home'),
+    # path('', views.home, name='home'),
     path('bTech/', views.bTech, name='bTech'),
     path('register/', views.register, name='register'),  
     path('login/', views.user_login, name='login'),
@@ -48,7 +49,6 @@ urlpatterns = [
     path('feedback/', views.feedback_view, name='feedback'),
     path('csec/', views.contact_us, name='contact_us'),
     path('search/', views.search_view, name='search'),
-    path('oauth/', include('social_django.urls', namespace='social')),
   
     
   
