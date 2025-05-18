@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<link rel="shortcut icon" type="png" href="images/icon/favicon.png">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Comaptible" content="IE=edge">
+	<title>StudyHub</title>
+	<meta name="desciption" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{% static 'style.css' %}">
+	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	<script>
+		$(window).on('scroll', function(){
+  			if($(window).scrollTop()){
+  			  $('nav').addClass('black');
+ 			 }else {
+ 		   $('nav').removeClass('black');
+ 		 }
+		})
+		function redirectToCourse() {
+            var course = document.getElementById("courseDropdown").value;
+            if (course !== "") {
+                // Redirect to the selected course link
+                window.location.href = course;
+            } else {
+                alert("Please select a course.");
+            }
+        }
+	</script>
+	<style>
+		/* Contact Us Section Background Styling */
+#contactus_section {
+	background: rgba(0, 0, 0, 0.6); /* Transparent black */
+	backdrop-filter: blur(8px);
+	padding: 40px;
+	border-radius: 20px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+	max-width: 600px;
+	margin: auto;
+}
+
+/* Contact Us Heading Animation */
+#contactus_section p {
+	animation: fadeInDown 1s ease-out;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: #fff;
+	font-size: 24px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+/* Input and Textarea Styling */
+.contact-form input,
+.contact-form textarea {
+	width: 100%;
+	padding: 12px;
+	margin-bottom: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 10px;
+	background: rgba(255, 255, 255, 0.1);
+	color: #fff;
+	transition: all 0.3s ease;
+	font-size: 16px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	backdrop-filter: blur(4px);
+	opacity: 0;
+	transform: translateY(20px);
+	animation: slideIn 0.6s forwards;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+	border-color: #00c6ff;
+	box-shadow: 0 0 10px rgba(0, 198, 255, 0.5);
+	background: rgba(255, 255, 255, 0.2);
+	outline: none;
+}
+
+/* Staggered input animations */
+.contact-form input:nth-child(2) { animation-delay: 0.4s; }
+.contact-form input:nth-child(4) { animation-delay: 0.5s; }
+.contact-form textarea { animation-delay: 0.6s; }
+
+/* Submit Button Styling */
+.contact-form button {
+	padding: 14px 30px;
+	background: linear-gradient(135deg, #00C6FF, #007BFF);
+	color: white;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	font-size: 18px;
+	font-weight: bold;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+	opacity: 0;
+	transform: translateY(10px);
+	animation: fadeInUp 1s ease forwards;
+	animation-delay: 0.8s;
+	transition: transform 0.2s ease;
+}
+
+/* Submit button animated effect */
+.contact-form button::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -75%;
+	width: 50%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.3);
+	transform: skewX(-20deg);
+	transition: left 0.5s;
+	z-index: 0;
+}
+
+.contact-form button:hover::before {
+	left: 130%;
+}
+
+.contact-form button:hover {
+	transform: scale(1.08);
+}
+
+/* Contact Info Styling */
+.contact-info {
+	animation: fadeIn 1s ease-in-out;
+	color: #eee;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 16px;
+	text-align: center;
+	margin-top: 20px;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+	from { opacity: 0; transform: translateY(-30px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+	to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+	from { opacity: 0; transform: translateY(20px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+/* Responsive Fixes */
+@media (max-width: 600px) {
+	#contactus_section {
+		padding: 20px;
+	}
+	.contact-form button {
+		width: 100%;
+	}
+}
+/* Transparent purple background for the contact-form container */
+.contact-form {
+	background: rgba(128, 0, 128, 0.2) !important; /* transparent purple */
+	backdrop-filter: blur(4px);
+	box-shadow: 0 0 20px rgba(128, 0, 128, 0.3);
+}
+
+/* White background inside inputs and textarea */
+.contact-form input,
+.contact-form textarea {
+	background: rgba(255, 255, 255, 1) !important; /* white input field */
+	color: #000; /* black text for readability */
+}
+
+		/* Red button styles */
+		.auth-button {
+			background-color: red;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			cursor: pointer;
+			font-size: 16px;
+			border-radius: 5px;
+		}
+
+		.auth-button:hover {
+			background-color: darkred;
+		}
+		.card:nth-child(3){
+		border-top: 5px solid rgb(216, 18, 51);
+   }
+        .card:nth-child(4){
+	border-top: 5px solid rgb(93, 14, 162);
+   }
+        .card:nth-child(3):hover {
+	    box-shadow: inset 0px 0px 10px rgba(216 ,18,51),
+		1px 1px 30px rgba(216,18,51);
+    }
+        .card:nth-child(4):hover {
+	    box-shadow: inset 0px 0px 10px rgba(93,14,162),
+		1px 1px 30px rgba(93,14,162);
+    }
+	.csec {
+	background: linear-gradient(to right, #FA4B37, #DF2771);
+	background-attachment: fixed; 
+	position: absolute;
+	width: 100%;
+	height: 250px;
+	top: 200px;
+	content: '';
+	transform-origin: top right;
+	transform: skewY(-10deg);
+	z-index: -1;
+}
+.back-contact {
+	margin-top: 0px;
+	transform: translateY(-50px);
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+.cc {
+	height: 400px;
+	width: 400px;
+	height: 500px;
+	border-radius: 10px;
+	justify-content: center;
+	box-shadow: 1px 1px 20px rgba(0,0,0,0.4);
+	background: #fff;
+}
+.cc form {
+	margin: 5%;
+	margin-top: 40px;
+	width: 90%;
+	height: 90%;
+}
+.cc form label {
+	position: absolute;
+	color: #2E3D49;
+	font-size: 10px;
+	font-weight: 800;
+}
+.cc form input {
+	padding: 15px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	box-shadow: inset 0 0 5px lightgray;
+	border: 1px solid rgba(0,0,0,0.2);
+	outline: none;
+	color: #2E3D49;
+	font-weight: 600;
+}
+.imp {
+	color: red;
+}
+form textarea {
+	width: 100%;
+	height: 100px;
+	box-shadow: inset 0 0 5px lightgray;
+	border: 1px solid rgba(0,0,0,0.2);
+	border-radius: 5px;
+	outline: none;
+	color: #2E3D49;
+	font-weight: 600;
+	padding: 15px;
+}
+#csubmit {
+	margin-top: 20px; 
+	background: linear-gradient(to right, #FA4B37, #DF2771);
+	border-radius: 5px;
+	border-style: none;
+	outline: none;
+	width: 100%;
+	padding: 15px 25px;
+	color: #fff;
+	font-size: 12px;
+	cursor: pointer;
+}
+/* Labels ko coral color */
+label[for="name"],
+	label[for="email"],
+	label[for="message"] {
+		color: coral;
+		font-weight: bold;
+	}
+
+	/* Input aur textarea pe halka coral background */
+	input[name="name"],
+	input[name="email"],
+	textarea[name="message"] {
+		width: 100%;
+		padding: 10px;
+		margin-bottom: 15px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		background-color: rgba(240, 128, 128, 0.1); /* Light coral shader */
+}
+	</style>
+	<style>
+		/* Form left side corner & transparent background */
+		.feedback-form {
+    background-color: rgba(55, 129, 213, 0.15); /* transparent sky blue */
+}
+
+.feedback-form form {
+    background-color: rgba(55, 129, 213, 0.15); /* light transparent sky blue */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+		.feedback-form {
+			position: relative;
+			width: 50% !important;
+			margin-left: 5% !important;
+			margin-right: auto;
+			background-color: rgba(0, 123, 255, 0.1); /* Transparent light blue */
+			padding: 30px;
+			border-radius: 10px;
+			box-shadow: 0px 0px 15px rgba(0,0,0,0.15);
+			overflow: hidden;
+			opacity: 0;
+			transform: scale(0.8);
+			transition: opacity 0.3s ease, transform 0.3s ease;
+		}
+		
+		/* Hidden initially */
+		.feedback-form.animated {
+			opacity: 1;
+			transform: scale(1);
+		}
+		
+		/* Cubes from inside animation */
+		.feedback-form::before {
+			content: "";
+			position: absolute;
+			top: 0; left: 0;
+			width: 100%; height: 100%;
+			background-image: 
+				linear-gradient(45deg, rgba(0,123,255,0.3) 25%, transparent 25%),
+				linear-gradient(-45deg, rgba(0,123,255,0.3) 25%, transparent 25%),
+				linear-gradient(45deg, transparent 75%, rgba(0,123,255,0.3) 75%),
+				linear-gradient(-45deg, transparent 75%, rgba(0,123,255,0.3) 75%);
+			background-size: 40px 40px;
+			z-index: 2;
+			animation: cubeRise 1s forwards;
+			pointer-events: none;
+		}
+		
+		@keyframes cubeRise {
+			0% { transform: scale(0.3); opacity: 0.6; }
+			100% { transform: scale(1); opacity: 0; }
+		}
+		
+		/* Show form content after background builds */
+		.feedback-form form {
+			position: relative;
+			z-index: 3;
+			opacity: 0;
+			animation: formReveal 0.5s ease 1s forwards;
+		}
+		
+		/* Labels black */
+		.feedback-form label {
+			color: #000;
+			font-weight: bold;
+		}
+		
+		/* Inputs white with slight transition */
+		.feedback-form input,
+		.feedback-form textarea {
+			background-color: #fff !important;
+			color: #000;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			padding: 10px;
+			margin-bottom: 15px;
+			width: 100%;
+			box-sizing: border-box;
+			transition: box-shadow 0.3s ease;
+		}
+		
+		/* Focus effect */
+		.feedback-form input:focus,
+		.feedback-form textarea:focus {
+			box-shadow: 0 0 8px rgba(0,123,255,0.5);
+			outline: none;
+		}
+		
+		/* Submit button hidden initially */
+		.feedback-form button {
+			opacity: 0;
+			transform: scale(0.8);
+			transition: opacity 0.4s ease, transform 0.4s ease;
+		}
+		
+		/* Button appears after animation */
+		.feedback-form.animated button {
+			opacity: 1;
+			transform: scale(1);
+		}
+		
+		/* Reveal form animation */
+		@keyframes formReveal {
+			from {
+				opacity: 0;
+				transform: scale(0.5);
+			}
+			to {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
+		</style>
+		
+		<script>
+		// Animate on scroll
+		document.addEventListener("DOMContentLoaded", () => {
+			const form = document.querySelector(".feedback-form");
+		
+			function isInViewport(el) {
+				const rect = el.getBoundingClientRect();
+				return (
+					rect.top <= window.innerHeight && rect.bottom >= 0
+				);
+			}
+		
+			function triggerFormAnimation() {
+				if (isInViewport(form)) {
+					form.classList.remove("animated"); // reset
+					void form.offsetWidth; // trigger reflow
+					form.classList.add("animated");
+				}
+			}
+		
+			window.addEventListener("scroll", triggerFormAnimation);
+			triggerFormAnimation(); // also trigger on load if in view
+		});
+		</script>
+<!-- about section -->
+<style>
+	/* Add this new style for text containers */
+	.text-container {
+		background-color: white;
+		padding: 30px;
+		border-radius: 10px;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+		margin: 20px 0;
+	}
+	
+	/* Your existing animations */
+	@keyframes fadeSlideIn {
+		0% {
+			opacity: 0;
+			transform: translateY(50px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	
+	.about-content {
+		animation: fadeSlideIn 1.5s ease-in-out forwards;
+	}
+	
+	.side-text {
+		animation: fadeSlideIn 1.5s ease-in-out forwards;
+		background-color: white; /* Added white background */
+		padding: 25px; /* Added padding */
+		border-radius: 8px; /* Rounded corners */
+	}
+	
+	.side-text h2 {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		color: #150808;
+		font-size: 30px;
+		margin-bottom: 20px;
+	}
+	
+	.side-text p {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		color: #150808;
+		font-size: 18px;
+		line-height: 1.6;
+	}
+	
+	.sideImage {
+		transform: translateX(100px);
+		opacity: 0;
+		transition: 0.8s ease-in-out;
+	}
+	
+	.sideImage.visible {
+		transform: translateX(0);
+		opacity: 1;
+	}
+	</style>
+	
+	<!-- ✅ Google verification meta tag -->
+    <meta name="google-site-verification" content="25KpoZmT9vLecnxkYapmxA_eRfA6tNY6zn5p0Wk-IXQ" />
+	
+</head>
+<body>
+<!-- Navigation Bar -->
+	<header id="header">
+		<nav>
+			<div class="logo"><img src="https://th.bing.com/th/id/R.38992b23e6f95274e16445c4143c5039?rik=Wzo0lPgD1hL3rw&riu=http%3a%2f%2fwww.48hourslogo.com%2f48hourslogo_data%2f2015%2f11%2f12%2f20151112102039122.jpg&ehk=ZVETUtzKY62JDIABTBNclQmGVnYjkuwUDqiGxS2IIw8%3d&risl=&pid=ImgRaw&r=0" alt="logo"></div>
+			<ul>
+				<li><a class="active" href="">Home</a></li>
+				<li><a href="#portfolio_section">Portfolio</a></li>
+				<li><a href="#team_section">Team</a></li>
+				<li><a href="#services_section">Services</a></li>
+				<li><a href="#contactus_section">Contact</a></li>
+			</ul>
+			<form action="javascript:void(0);" style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+				<label for="courseDropdown"></label>
+				<select id="courseDropdown">
+					<option value="">-- Select Course --</option>
+					<option value="BCAnotes/">BCA</option>
+					<option value="bTech/">B.tech</option>
+					<option value="MCA/">MCA</option>
+					<option value="BSCIT/">BSCIT</option>
+					<option value="M.tech">M.tech</option>
+				</select>
+			
+				<button type="button" onclick="redirectToCourse()">Search</button>
+			</form>
+			<!-- Dynamic Authentication Button -->
+			{% if user.is_authenticated %}
+    <form method="post" action="{% url 'logout' %}" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="auth-button">Logout</button>
+    </form>
+{% else %}
+    <a href="{% url 'login' %}">
+        <button type="button" class="auth-button">Get Started</button>
+    </a>
+{% endif %}
+
+			<img src="images/icon/menu.png" class="menu" onclick="sideMenu(0)" alt="menu">
+		</nav>
+		<div class="head-container">
+			<div class="quote">
+				<p>The beauty of learning is that it’s a treasure no one can ever steal from you.</p>
+				<h5>Education is the journey of guiding individuals to acquire knowledge, skills, values, and beliefs. It encompasses a variety of methods such as teaching, training, storytelling, discussions, and research.</h5>
+				<div class="play">
+<<<<<<< HEAD
+					<img src="https://img.freepik.com/premium-vector/play-button-vector-icon-play-button-circle-logo-design_610482-224.jpg?w=2000" alt="play"><span><a href="https://www.youtube.com/watch?v=KFyrgDO1WXk" target="_blank">Watch Now</a></span>
+=======
+					<img src="https://img.freepik.com/premium-vector/play-button-vector-icon-play-button-circle-logo-design_610482-224.jpg?w=2000" alt="play"><span><a href=" " target="_blank">Watch Now</a></span>
+>>>>>>> dba6e9557a4b7328aa1816b9073e2c270e14a2ca
+				</div>
+			</div>
+			<div class="svg-image">
+				<img src="https://static.vecteezy.com/system/resources/previews/001/937/625/large_2x/online-education-application-learning-worldwide-on-phone-mobile-website-background-social-distance-concept-the-classroom-training-course-library-illustration-flat-design-vector.jpg" alt="svg">
+			</div>
+		</div>
+		<div class="side-menu" id="side-menu">
+			<div class="close" onclick="sideMenu(1)"><img src="images/icon/close.png" alt=""></div>
+			<div class="user">
+				<img src="images/creator/rahul.jpeg" alt="Username">
+				<p>rahultyagi</p>
+			</div>
+			<ul>
+				<li><a href="#about_section">About</a></li>
+				<li><a href="#portfolio_section">Portfolio</a></li>
+				<li><a href="#team_section">Team</a></li>
+				<li><a href="#services_section">Services</a></li>
+				<li><a href="#contactus_section">Contact</a></li>
+				<li><a href="#feedBACK">Feedback</a></li>
+			</ul>
+		</div>
+	</header>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			let authButton = document.getElementById("authButton");
+
+			// Check if user is logged in (using localStorage)
+			let isAuthenticated = localStorage.getItem("isAuthenticated");
+
+			if (isAuthenticated==="true") {
+				authButton.textContent = "Logout";
+				authButton.onclick = function () {
+					localStorage.setItem("isAuthenticated", "false");
+					window.location.reload(); // Reload page to update UI
+				};
+			} else {
+				authButton.textContent = "Get Started";
+				authButton.onclick = function () {
+					window.location.href = "login.html"; // Redirect to login page
+				};
+			}
+		});
+	</script>
+
+
+<!-- Some Popular Subjects -->
+	<div class="title">
+		<span>Popular Cources on StudyHub</span>
+	</div>
+	<br><br>
+	<div class="course">
+		<center><div class="cbox">
+		<div class="det"><a href="/BCAnotes"><img src="https://media.istockphoto.com/vectors/open-book-vector-silhouette-icon-logo-symbol-sign-black-and-white-vector-id1223190360?k=20&m=1223190360&s=170667a&w=0&h=dAMKkkowwyS5g-lIpWIbRbem2nJxW-9UhgPN-4RPbWc=">BCA</a></div>
+		<div class="det"><a href="/bTech"><img src="https://reviewsreporter.com/wp-content/uploads/2022/03/main-qimg-3c1e5514f2854c30ad2900bbad6857e2.png">B.tech</a></div>
+		<div class="det"><a href="/sample"><img src="https://th.bing.com/th/id/OIP.hElLjQUQP6VsqbzZisgJRAHaEn?rs=1&pid=ImgDetMain">Sample Papers</a></div>
+		<div class="det"><a href="/subjectsquiz"><img src="https://thumbs.dreamstime.com/b/quiz-icon-dark-background-simple-vector-116813786.jpg">Subject Quiz</a></div>
+		</div></center>
+		<div class="cbox">
+		<div class="det"><a href="/MCA"><img src="https://c8.alamy.com/comp/MY8AD9/desktop-computer-icon-vector-symbol-graphic-logo-design-MY8AD9.jpg">MCA</a></div>
+		<div class="det"><a href="/BSCIT"><img src="https://image.shutterstock.com/image-vector/data-structure-icon-showing-algorithms-260nw-1188490738.jpg">BSCIT</a></div>
+		<div class="det"><a href="/M.Tech"><img src="https://thumbs.dreamstime.com/b/algorithm-flat-line-icon-vector-thin-sign-workflow-diagram-logo-business-scheme-outline-illustration-160522788.jpg">M.Tech</a></div>
+		
+		</div>
+	</div>
+
+	<!--about us  -->
+	<div class="diffSection" id="about_section">
+		<center><p style="font-size: 50px; padding: 100px">About</p></center>
+		<div class="about-content">
+			<div class="side-image">
+				<img class="sideImage" src="https://blogking.uk/wp-content/uploads/2023/04/Distance-Learning-and-Virtual-Education-1.png">
+			</div>
+			<div class="side-text">
+				<h2>What you think about us?</h2>
+				<p>Education is the process of encouraging learning or the development of values, beliefs, habits, and skills. Educational tactics include instruction, training, discussion, narrative, and concentrated study.<br><br>
+					An educational website can include resources such as games, movies, or topic-related tools that enhance learning and supplement in-class instruction.<br><br>
+					By utilizing HTML, CSS, and JavaScript, we can create more engaging and effective learning experiences that are both accessible and fun.
+				</p>
+			</div>
+		</div>
+	</div>
+	
+
+
+<!-- PORTFOLIO -->
+	<div class="diffSection" id="portfolio_section">
+		<center><p style="font-size: 50px; padding: 100px; padding-bottom: 40px;">Portfolio</p></center>
+		<div class="content">
+			<p>
+				"Education opens the doors to the future, as those who prepare today will shape tomorrow. It's not just about ability, but attitude that defines how far you'll go. If you believe education is costly, try the price of ignorance. True education is learning how to learn and adapt to change."
+			</p>
+		</div>
+	</div>
+	<div class="extra">
+		<p>We're increasing this data every year</p>
+		<div class="smbox">
+		<span><center><div class="data">10</div><div class="det">Enrolled Students</div></center></span>
+		<span><center><div class="data">0</div><div class="det">Total Courses</div></center></span>
+		<span><center><div class="data">0</div><div class="det">Placed Students</div></center></span>
+		<span><center><div class="data">0</div><div class="det">Total Projects</div></center></span>
+		</div>
+	</div>
+
+
+<!-- TEAM -->
+	<div class="diffSection" id="team_section">
+		<center><p style="font-size: 50px; padding-top: 100px; padding-bottom: 60px;">We're the Creators</p></center>
+		<div class="totalcard">
+			<div class="card">
+				<center><img src="https://static.vecteezy.com/system/resources/previews/016/009/835/non_2x/the-human-icon-and-logo-vector.jpg"></center>
+				<center><div class="card-title">Rahul tyagi</div>
+				<div id="detail">
+					<p>“ You can teach a student a lesson for a day; but if you can teach him to learn by creating curiosity, he will continue the learning process as long as he lives “</p>
+					<div class="duty"></div>
+					<a href="https://www.linkedin.com/in/rahul-tyagi-34a56b24b" target="_blank"><button class="btn-roshan">Follow +</button></a>
+				</div>
+				</center>
+			</div>
+			<div class="card">
+				<center><img src="https://static.vecteezy.com/system/resources/previews/016/009/835/non_2x/the-human-icon-and-logo-vector.jpg"></center>
+				<center><div class="card-title">Gaurav pandey</div>
+				<div id="detail">
+					<p>“ Real education should consist of drawing the goodness and the best out of our own students. What better books can there be than the book of humanity “</p>
+					<div class="duty"></div>
+					<a href="https://www.linkedin.com/in/gaurav-pandey-6654b124b" target="_blank"><button class="btn-akhil">Follow +</button></a>
+				</div>
+				</center>
+			</div>
+			<div class="card">
+				<center><img src="https://static.vecteezy.com/system/resources/previews/016/009/835/non_2x/the-human-icon-and-logo-vector.jpg"></center>
+				<center><div class="card-title">Pradeep Bhadana</div>
+				<div id="detail">
+					<p>"The task of the modern educator is not to cut down jungles, but to irrigate deserts. True learning awakens what already lies within the soul"</p>
+					<div class="duty"></div>
+					<a href="http://linkedin.com/in/pradeep-bhadana-075857261" target="_blank"><button class="btn-roshan">Follow +</button></a>
+				</div>
+				</center>
+			</div>
+			<div class="card">
+				<center><img src="https://static.vecteezy.com/system/resources/previews/016/009/835/non_2x/the-human-icon-and-logo-vector.jpg"></center>
+				<center><div class="card-title">Aditya</div>
+				<div id="detail">
+					<p>""Real education should consist of drawing the goodness and the best out of our own students. What better books can there be than the book of humanity.""</p>
+					<div class="duty"></div>
+					<a href="http://linkedin.com/in/aditya-singh-b544ab24b" target="_blank"><button class="btn-roshan">Follow +</button></a>
+				</div>
+				</center>
+			</div>
+		</div>
+	</div>
+
+
+<!-- SERVICES -->
+	<div class="service-swipe">
+		<div class="diffSection" id="services_section">
+		<center><p style="font-size: 50px; padding: 100px; padding-bottom: 40px; color: #fff;">Services</p></center>
+		</div>
+		<a href="subjects/computer_courses.html"><div class="s-card"><img src="https://cdn4.iconfinder.com/data/icons/quiz-flaticon-1/64/online_test-computer-test-course-online_learning-elearning-exam_-256.png"><p>Free Online Computer Courses</p></div></a>
+		<a href="subjects/jee.html"><div class="s-card"><img src="https://th.bing.com/th/id/OIP.v8maHhquey3WXnUHhfyG_gHaEc?rs=1&pid=ImgDetMain"><p>Building Concepts for Competitive Exams</p></div></a>
+		<a href="#"><div class="s-card"><img src="https://arridetechnologies.com/wp-content/uploads/2021/02/online-lecture.jpg"><p>Online Video Lectures</p></div></a>
+		<a href="sample.html#sample_papers"><div class="s-card"><img src="https://thumbs.dreamstime.com/b/paper-logo-vector-element-template-224156869.jpg"><p>Sample Papers of Various Competitive Exams</p></div></a>
+		
+		<a href="#contactus_section"><div class="s-card"><img src="https://th.bing.com/th/id/OIP.J71Dn9mcnuQxLkE0MTsCEQHaE7?w=2048&h=1365&rs=1&pid=ImgDetMain"><p>Discussion with Our Tutors & Mentors</p></div></a>
+		<a href="subjects/quiz.html"><div class="s-card"><img src="https://th.bing.com/th/id/OIP.MzT_afZ6_UHMC4oCilqhLQHaHa?rs=1&pid=ImgDetMain"><p>Daily Brain Teasing Questions to Improve IQ</p></div></a>
+		<a href="#contactus_section"><div class="s-card"><img src="https://i.pinimg.com/736x/cc/d1/a3/ccd1a3fb1e2b81382c2a64c5eedf26ec.jpg"><p>24x7 Online Support</p></div></a>
+	</div>
+
+<!-- CONTACT US -->
+<div class="diffSection" id="contactus_section">
+	<center>
+		<p style="font-size: 50px; padding: 100px; padding-bottom: 40px;">Contact Us</p>
+	</center>
+	<div class="csec/">
+		<div class="contact-form" style="width: 60%; margin: auto; background-color: #f9f9f9; padding: 30px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
+			<form method="POST" action="{% url 'contact_us' %}">
+				{% csrf_token %}
+				<label for="name" style="font-weight: bold;">Your Name </label><br>
+            <input type="text" name="name" id="name" placeholder="Enter your full name" required><br>
+
+            <label for="email" style="font-weight: bold;">Your Email </label><br>
+            <input type="email" name="email" id="email" placeholder="Enter your email" required><br>
+
+            <label for="message" style="font-weight: bold;">Your Message </label><br>
+            <textarea name="message" id="message" placeholder="Write your message here..." required></textarea><br>
+
+            <button type="submit">Send Message</button>
+			</form>
+		</div>
+
+		<div class="contact-info" style="width: 60%; margin: 40px auto 0 auto; text-align: center;">
+			<p style="font-size: 18px;">For any queries, feel free to reach out to us:</p>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- FEEDBACK SECTION -->
+<div class="diffSection" id="feedback">
+	<center>
+		<p style="font-size: 50px; padding: 100px 0 40px;">Feedback</p>
+	</center>
+
+	<div class="feedback/">
+		<div class="feedback-form" style="width: 60%; margin: auto; background-color: #f9f9f9; padding: 30px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
+			<form method="POST" action="{% url 'feedback' %}">
+				{% csrf_token %}
+				
+				<label style="font-weight: bold;">Your Name </label><br>
+				<input type="text" name="name" placeholder="Enter your name" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;"><br>
+
+				<label style="font-weight: bold;">Your Course </label><br>
+				<input type="text" name="course" placeholder="Enter your course" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;"><br>
+
+				<label style="font-weight: bold;">Your Email </label><br>
+				<input type="email" name="email" placeholder="Enter your email" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;"><br>
+
+				<label style="font-weight: bold;">Your Feedback </label><br>
+				<textarea name="message" placeholder="Write your feedback here..." rows="5" required style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;"></textarea><br>
+
+				<button type="submit" style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">Submit Feedback</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<!-- Sliding Information -->
+	<marquee style="background: linear-gradient(to right, #FA4B37, #DF2771); margin-top: 50px;" direction="left" onmouseover="this.stop()" onmouseout="this.start()" scrollamount="20"><div class="marqu">“Education is the passport to the future, for tomorrow belongs to those who prepare for it today.” “Your attitude, not your aptitude, will determine your altitude.” “If you think education is expensive, try ignorance.” “The only person who is educated is the one who has learned how to learn …and change.”</div></marquee>
+
+<!-- FOOTER -->
+	<footer>
+		<div class="footer-container">
+			<div class="left-col">
+				<img src="https://th.bing.com/th/id/R.38992b23e6f95274e16445c4143c5039?rik=Wzo0lPgD1hL3rw&riu=http%3a%2f%2fwww.48hourslogo.com%2f48hourslogo_data%2f2015%2f11%2f12%2f20151112102039122.jpg&ehk=ZVETUtzKY62JDIABTBNclQmGVnYjkuwUDqiGxS2IIw8%3d&risl=&pid=ImgRaw&r=0" style="width: 200px;">
+				<div class="logo"></div>
+				<div class="social-media">
+					<a href="#"><img src="https://www.freeiconspng.com/uploads/facebook-black-radius-transparent-26.png"></a>
+					<a href="#"><img src="https://th.bing.com/th/id/R.81a9a9d3bbe2c4dfaf2d62b0599414c1?rik=iWSbB72DrwxdeA&riu=http%3a%2f%2ffreelogopng.com%2fimages%2fall_img%2f1658588720instagram-logo-black-and-white.png&ehk=3CITZQNEtSAMoYjutAom5Iwcd0q7lfAEZUNE0mFyGeI%3d&risl=&pid=ImgRaw&r=0"></a>
+					<a href="#"><img src="https://toppng.com/uploads/preview/twitter-x-new-logo-icon-png-11692480121koxvq54was.webp"></a>
+					<a href="#"><img src="https://static.vecteezy.com/system/resources/previews/023/986/519/non_2x/youtube-logo-youtube-logo-transparent-youtube-icon-transparent-free-free-png.png"></a>
+					<a href="#"><img src="https://th.bing.com/th/id/R.42f8397a5e20e9f401d149a24b8c1bf3?rik=jTpdsti6m94Vww&riu=http%3a%2f%2fwww.newdesignfile.com%2fpostpic%2f2009%2f07%2flinkedin-logo-black_134815.png&ehk=Ta9mZylUH0an0GzU9vXGABkr%2fqgJA%2fX%2f2c43TSTyu4s%3d&risl=&pid=ImgRaw&r=0"></a>
+				</div><br><br>
+				<p class="rights-text">Copyright © 2025 Created By Rahul tyagi, Gaurav pandey All Rights Reserved.</p>
+				<br><p><img src="https://img.freepik.com/premium-vector/map-logo-location-vector_607588-10391.jpg?w=2000" height="30px"> Manav Rachna University<br>Faridabad - 121004</p><br>
+				<p><img src="https://th.bing.com/th/id/OIP.nzU2AHzSgvPUAga2fu39KgHaIW?rs=1&pid=ImgDetMain" height="30px"> +91-9821202483<br><img src="https://static.vecteezy.com/system/resources/previews/022/648/084/original/email-icon-for-your-website-mobile-presentation-and-logo-design-free-vector.jpg" height="30px">&nbsp; tyagirahul2002@gmail.com</p>
+			</div>
+			<div class="right-col">
+				<h1 style="color: #fff">Our Newsletter</h1>
+				<div class="border"></div><br>
+				<p>Enter Your Email to get our News and updates.</p>
+				<form class="newsletter-form">
+					<input class="txtb" type="email" placeholder="Enter Your Email">
+					<input class="btn" type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+	</footer>
+	<!-- Add this inside your existing form -->
+<script>
+    document.getElementById('contactForm').onsubmit = function(event) {
+        event.preventDefault();  // Prevent form from submitting normally
+
+        // Simulate form submission success
+        setTimeout(function() {
+            // Display success message
+            alert("Message sent successfully!");
+            document.getElementById('contactForm').reset(); // Reset form fields
+        }, 500);  // Simulate delay (adjust as needed)
+    };
+</script>
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const image = document.querySelector('.sideImage');
+	
+		const observer = new IntersectionObserver(entries => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+				}
+			});
+		}, { threshold: 0.3 });
+	
+		observer.observe(image);
+	});
+	document.addEventListener('DOMContentLoaded', function () {
+    const targets = document.querySelectorAll('.sideImage, .side-text');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.3 });
+
+    targets.forEach(el => observer.observe(el));
+});
+
+	</script>
+	
+
+</body>
+</html>

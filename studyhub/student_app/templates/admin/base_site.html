@@ -1,0 +1,29 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}
+  {% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}
+{% endblock %}
+
+{% block branding %}
+  <div id="site-name">
+    <img src="https://media.tenor.com/n8LZzGdCj3gAAAAi/fire-dragon.gif" alt="Dragon" class="dragon-left">
+    <a href="{% url 'admin:index' %}">📘 StudyHub Admin</a>
+  </div>
+  
+  {% if user.is_anonymous %}
+    {% include "admin/color_theme_toggle.html" %}
+  {% endif %}
+{% endblock %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+{% endblock %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <script src="{% static 'js/custom_admin.js' %}"></script>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

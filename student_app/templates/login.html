@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" type="png" href="{% static 'images/icon/favicon.png' %}">
+    <title>Login SignUp</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'loginStyle.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        .input-group { display: none; }
+        #login { display: block; }
+        .button-box { position: relative; width: 220px; margin: auto; }
+        #btn {
+            position: absolute;
+            width: 110px; height: 100%;
+            background: red; border-radius: 30px;
+            transition: .5s;
+        }
+
+        .alert {
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            text-align: center;
+            color: white;
+            border-radius: 5px;
+        }
+        .alert-success { background-color: green; }
+        .alert-error { background-color: red; }
+<<<<<<< HEAD
+=======
+        
+>>>>>>> dba6e9557a4b7328aa1816b9073e2c270e14a2ca
+    </style>
+</head>
+<body>
+    <div class="form-box">
+        <div class="button-box">
+            <div id="btn"></div>
+            <button type="button" class="toggle-btn" id="log" onclick="login()">Log In</button>
+            <button type="button" class="toggle-btn" id="reg" onclick="register()">Register</button>
+        </div>
+
+        <!-- Show Django messages -->
+        <div id="messageContainer">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="social-icons">
+            <img src="https://th.bing.com/th/id/OIP.Amcd6uomcBrkzfHXrg14gAHaHa?rs=1&pid=ImgDetMain">
+            <img src="https://th.bing.com/th/id/OIP.FlDsivteBsfuG2pxZ6yr3gAAAA?rs=1&pid=ImgDetMain">
+            <img src="https://static.vecteezy.com/system/resources/previews/027/395/710/original/twitter-brand-new-logo-3-d-with-new-x-shaped-graphic-of-the-world-s-most-popular-social-media-free-png.png">
+        </div>
+
+        <!-- ✅ Login Form -->
+        <form id="login" class="input-group" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="inp">
+                <img src="https://static.vecteezy.com/system/resources/previews/016/009/835/non_2x/the-human-icon-and-logo-vector.jpg">
+                <input type="text" name="username" class="input-field" placeholder="Username" required>
+            </div>
+            <div class="inp">
+                <img src="https://th.bing.com/th/id/OIP.nr8hWKpd9xYjb3fRTHqWQgHaJW?rs=1&pid=ImgDetMain">
+                <input type="password" name="password" class="input-field" placeholder="Password" required>
+            </div>
+            <label>
+                <input type="checkbox" class="check-box"> Remember Password
+            </label>
+            <button type="submit" class="submit-btn">Log In</button>
+        </form>
+
+        <div class="other" id="other">
+            <div class="instead">
+                <h3>or</h3>
+            </div>
+<<<<<<< HEAD
+            <a href="{% url 'social:begin' 'google-oauth2' %}?next=/" class="connect" style="text-decoration: none;">
+=======
+           <a href="{% url 'google_login' %}?next=/" class="connect" style="text-decoration: none;">
+
+>>>>>>> dba6e9557a4b7328aa1816b9073e2c270e14a2ca
+                <img src="https://static.vecteezy.com/system/resources/previews/021/496/096/large_2x/google-symbol-logo-design-illustration-with-black-background-free-vector.jpg">
+                <span>Sign in with Google</span>
+            </a>
+            
+        </div>
+
+        <!-- ✅ Registration Form -->
+        <form id="register" class="input-group" method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            <input type="text" name="full_name" placeholder="Full Name" class="input-field" required><br>
+            <input type="email" name="email" placeholder="Email" class="input-field" required><br>
+            <input type="password" name="password1" placeholder="Password" class="input-field" required><br>
+            <input type="password" name="password2" placeholder="Confirm Password" class="input-field" required><br>
+            <button type="submit" class="submit-btn">Register</button>
+        </form>
+    </div>
+
+    <script>
+        function login() {
+            document.getElementById("login").style.display = "block";
+            document.getElementById("register").style.display = "none";
+            document.getElementById("log").style.color = "#fff";
+            document.getElementById("reg").style.color = "#000";
+            document.getElementById("btn").style.left = "0px";
+        }
+
+        function register() {
+            document.getElementById("login").style.display = "none";
+            document.getElementById("register").style.display = "block";
+            document.getElementById("log").style.color = "#000";
+            document.getElementById("reg").style.color = "#fff";
+            document.getElementById("btn").style.left = "110px";
+        }
+
+        window.onload = function () {
+            login(); // Show login form by default
+
+            // Automatically hide messages after 3 seconds
+            setTimeout(function() {
+                var messageContainer = document.getElementById("messageContainer");
+                messageContainer.style.display = "none"; // Hide messages after 3 seconds
+            }, 3000);
+        };
+    </script>
+</body>
+</html>

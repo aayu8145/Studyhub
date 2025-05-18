@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCA (General) Notes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'BCAstyle.css' %}">
+    <style>
+        .hidden {
+            display: none;
+        }
+        .search-results-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .notes-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .notes-container li {
+            padding: 8px 0;
+        }
+        .note-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <style>
+        .search-container {
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            width: 100%;
+        }
+    
+        .search-container input[type="text"] {
+            padding: 8px 12px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+            font-size: 16px;
+        }
+    
+        .search-container input[type="text"]:focus {
+            border-color: #0056b3;
+        }
+    
+        .search-container button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: pulse 2s infinite ease-in-out;
+        }
+    
+        .search-container button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+            animation: bounce 0.5s;
+        }
+    
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+    
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+            }
+        }
+    </style>
+    
+    <header>
+        <h1>BCA (General) Notes</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/BCA_AIML">BCA(AI/ML)</a></li>
+                <li><a href="/BCA_CS">BCA(CyberSecurity)</a></li>
+                <li><a href="/BCA_DS">BCA(Data Science)</a></li>
+            </ul>
+            <div class="search-container">
+                <input type="text" id="liveSearch" placeholder="Search subjects..." onkeyup="filterSubjects()">
+                <button type="submit">Search</button>
+            </div>    
+        </nav>
+    </header>
+
+    {% if is_search_page %}
+    <section class="search-results-section">
+        <h2>Results for "{{ query }}"</h2>
+    
+        {% if subjects or notes %}
+            {% if subjects %}
+                <h3>Matching Subjects:</h3>
+                <ul>
+                    {% for subject in subjects %}
+                        <li>
+                            <strong>{{ subject.name }}</strong> - 
+                            <a href="/subject/{{ subject.id }}">View Notes</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+    
+            {% if notes %}
+                <h3>Matching Notes:</h3>
+                <ul>
+                    {% for note in notes %}
+                        <li>
+                            <strong>{{ note.title }}</strong> 
+                            (Subject: {{ note.subject.name }})<br>
+                            <p>{{ note.content|truncatechars:200 }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% else %}
+            <p>No matching notes or subjects found.</p>
+        {% endif %}
+    </section>
+    {% endif %}
+
+    <section class="notes-container">
+        <h2>Select a Subject</h2>
+        <ul id="subjectList">
+            <li><a href="#Mathmatics">Elements of Mathmatics</a></li>
+            <li><a href="#dbms">Database Management System</a></li>
+            <li><a href="#HI">Hardware Interfaces</a></li>
+            <li><a href="#C Programming">Introduction to C Programming</a></li>
+            <li><a href="#DS Using C">Data Structures Using C</a></li>
+            <li><a href="#IT">Internet Technologies</a></li>
+            <li><a href="#SE">Software Engineering</a></li>
+            <li><a href="#EVS">Environmental Studies</a></li>
+            <li><a href="#OOP Using C++">Object Oriented Programming Using C++</a></li>
+            <li><a href="#OS">Introduction to Operating System</a></li>
+            <li><a href="#Mathmatics For Computer Science">Mathmatics For Computer Science</a></li>
+            <li><a href="#SP">Shell Programming</a></li>
+            <li><a href="#AF">Azure Fundamentals</a></li>
+            <li><a href="#ADF">Azure Data Fundamentals</a></li>
+            <li><a href="#NAST">Numerical Analysis and Statistical Techniques</a></li>
+            <li><a href="#WAD">Web Applications Development</a></li>
+            <li><a href="#Java">Programming in Java</a></li>
+            <li><a href="#CSA">Computer System Architecture</a></li>
+            <li><a href="#System Programming">System Programming</a></li>
+            <li><a href="#AI">Fundamentals of Artificial Intelligence</a></li>
+            <li><a href="#ADAA">Azure Database Administrator Associate</a></li>
+            <li><a href="#ACDDS">Azure Cosmos DB Developer Specialty</a></li>
+            <li><a href="#DCN">Data Communication & Networking</a></li>
+            <li><a href="#Rdbms">RDBMS</a></li>
+            <li><a href="#Python">Python Programming</a></li>
+            <li><a href="#CC">Introduction to Cloud Computing</a></li>
+            <li><a href="#ADEA">Azure Data Engineer Associate</a></li>
+            <li><a href="#CDPS">Customer Data Platform Specialty</a></li>
+            <li><a href="#C#">Programming in .NET using C#</a></li>
+            <li><a href="#ML">Machine Learning</a></li>
+            <li><a href="#M&A">Multimedia & Animation</a></li>
+            <li><a href="#ADSA">Azure Data Scientist Associate</a></li>
+            <li><a href="#AEDAA">Azure Enterprise Data Analyst Associate</a></li>
+        </ul>
+        <hr>
+        
+        <div class="note-section" id="Mathmatics">
+            <h2>Elements of Mathmatics</h2>
+            <p>Mathematics is the foundation of computing, involving concepts like algebra, calculus,
+             and discrete mathematics. It helps in problem-solving, logic building, and algorithm development,
+             which are essential for programming and data analysis.</p>
+            <a href="c:\Users\Admin\Documents\programming.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+        
+        <div class="note-section" id="dbms">
+            <h2>Database Management System (DBMS)</h2>
+            <p>A DBMS is software that helps store, manage, and retrieve data efficiently.
+                It ensures data integrity, security, and easy access for multiple users.
+                Common DBMS types include relational, hierarchical, and NoSQL databases.
+                Examples include MySQL, PostgreSQL, Oracle, and MongoDB.</p>
+            <a href="https://drive.google.com/file/d/1DPnPLRGXKYlJE6irZf-mz_DsNXaZ_Ygs/view?usp=drivesdk " download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+        
+        <div class="note-section" id="HI">
+            <h2>Hardware Interfaces</h2>
+            <p>Hardware interfaces enable communication between computer components and external devices.
+                They include ports, buses, and protocols like USB, HDMI, and PCI.
+                These interfaces allow data transfer between hardware and software systems.
+                Efficient interfaces ensure smooth functioning of computing devices.</p>
+            <a href="notes/networking.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+        
+        <div class="note-section" id="C Programming">
+            <h2>Introduction to C Programming</h2>
+            <p>C is a powerful, structured programming language used for system and application development.
+                It provides low-level memory access, making it efficient and fast.
+                Key features include functions, loops, arrays, and pointers.
+                C is widely used in operating systems, embedded systems, and software development.</p>
+            <a href="notes/os.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+        
+        <div class="note-section" id="DS Using C">
+            <h2>Data Structures Using C</h2>
+            <p>Data structures are essential for organizing and managing data efficiently.
+                In C, common structures include arrays, linked lists, stacks, and queues.
+                They help in optimizing memory usage and improving program performance.
+                Efficient data handling is crucial for algorithms and problem-solving.</p>
+            <a href="notes/software-engineering.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+        
+        <div class="note-section" id="IT">
+            <h2>Internet Technologies</h2>
+            <p>Internet technologies enable global communication and information exchange.
+                They include web development, networking protocols, and cloud computing.
+                Key components are HTTP, DNS, TCP/IP, and cybersecurity measures.
+                These technologies power websites, online services, and digital communication.</p>
+            <a href="https://drive.google.com/file/d/1C48ntVQiODOD2h8E0ahE6Kna09EYN3qY/view?usp=drivesdk " download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="SE">
+            <h2>Software Engineering</h2>
+            <p>Software engineering applies systematic approaches to software development.
+            It includes design, development, testing, and maintenance of software.
+            Key models include Waterfall, Agile, and DevOps methodologies.
+            The goal is to create reliable, efficient, and scalable software solutions.</p>
+            <a href="https://drive.google.com/file/d/1Widy9z2HsAv7U8KwqmmrmL-iP0VEUTLw/view?usp=drivesdk " download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="EVS">
+            <h2>Environmental Studies</h2>
+            <p>Environmental Studies explores the relationship between humans and nature.
+                It covers topics like pollution, conservation, and sustainable development.
+                The goal is to promote awareness and protect natural resources.
+                It helps in understanding environmental issues and finding solutions.</p>
+            <a href="https://drive.google.com/file/d/1DF4mfI-RZWsPTkJN0grhf7c6fWMZl1Kx/view?usp=drivesdk " download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="OOP Using C++">
+            <h2>Object Oriented Programming Using C++</h2>
+            <p>C++ follows the object-oriented paradigm for efficient code organization.
+                Key concepts include classes, objects, inheritance, and polymorphism.
+                It helps in creating modular, reusable, and scalable applications.
+                Widely used in game development, software engineering, and system programming.</p>
+            <a href="https://drive.google.com/file/d/1B9ZAyxnU_VjfPmhreCowTbyxII0XORrI/view?usp=drivesdk " download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="OS">
+            <h2>Introduction to Operating System</h2>
+            <p>An operating system (OS) manages hardware and software resources.
+                It handles tasks like process management, memory allocation, and security.
+                Common OS types include Windows, Linux, macOS, and Android.
+                It provides a user interface and ensures smooth system operation.</p>
+            <a href="https://drive.google.com/file/d/19YFylW4N5teeqd85N-4-M5W_c5Lq-Xil/view?usp=drivesdk " download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="Mathmatics For Computer Science">
+            <h2>Mathmatics For Computer Science</h2>
+            <p>Mathematics is essential for algorithms, data structures, and cryptography.
+                Key topics include logic, set theory, graph theory, and probability.
+                It helps in problem-solving, optimization, and computational thinking.
+                Used in AI, machine learning, networking, and software development.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="SP">
+            <h2>Shell Programming</h2>
+            <p>Shell programming automates tasks using command-line scripts.
+                It executes commands in Unix/Linux shells like Bash and Zsh.
+                Common tasks include file handling, process control, and automation.
+                Used for system administration, scripting, and task automation.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="AF">
+            <h2>Azure Fundamentals</h2>
+            <p>Azure Fundamentals provides a basic understanding of Microsoft Azure cloud services and concepts. It covers cloud computing principles, Azure core services, pricing, security, and compliance. The course helps learners explore Azure’s infrastructure, networking, and deployment models. It is ideal for beginners starting with cloud technology.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="ADF">
+            <h2>Azure Data Fundamentals</h2>
+            <p>Azure Data Fundamentals introduces core data concepts and how they are implemented using Microsoft Azure services. It covers relational and non-relational databases, big data, and analytics solutions. The course helps understand data storage, processing, and security in the cloud. It is ideal for beginners exploring cloud-based data management.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+
+        <div class="note-section" id="NAST">
+            <h2>Numerical Analysis and Statistical Techniques</h2>
+            <p>Numerical analysis solves mathematical problems using algorithms.
+                Statistical techniques analyze data, trends, and probabilities.
+                Both are used in computing, engineering, and data science.
+                They help in decision-making, simulations, and problem-solving.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="WAD">
+            <h2>Web Applications Development</h2>
+            <p>Web development involves creating dynamic and interactive websites.
+                It uses technologies like HTML, CSS, JavaScript, and frameworks.
+                Back-end development includes databases, APIs, and server management.
+                Web apps power e-commerce, social media, and online services.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="Java">
+            <h2>Programming in Java</h2>
+            <p>Java is a versatile, object-oriented programming language.
+                It is platform-independent due to its "Write Once, Run Anywhere" feature.
+                Common uses include web development, mobile apps, and enterprise software.
+                Key features include multithreading, memory management, and security.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="CSA">
+            <h2>Computer System Artchitecture</h2>
+            <p>Computer system architecture defines the structure and functionality of a computer.
+                It includes components like the CPU, memory, input/output devices, and storage.
+                Key concepts include instruction sets, pipelining, and memory hierarchy.
+                It is essential for designing efficient and high-performance computing systems.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="System Programming">
+            <h2>System Programming</h2>
+            <p>System programming focuses on developing software that interacts with hardware.
+                It includes writing operating systems, compilers, and device drivers.
+                Languages like C and Assembly are commonly used for system programming.
+                It ensures efficient resource management and hardware control.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="AI">
+            <h2>Fundamentals of Artificial Intelligence</h2>
+            <p>Artificial Intelligence (AI) enables machines to mimic human intelligence.
+                It includes machine learning, neural networks, and natural language processing.
+                AI is used in automation, robotics, and decision-making systems.
+                Common applications include chatbots, self-driving cars, and recommendation systems.</p>
+            <a href="https://drive.google.com/file/d/1zfde64kDRDSOZR4iF0k2PH-uxjY8S_E-/view?usp=drivesdk " download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="ADAA">
+            <h2>Azure Database Administractor Associate</h2>
+            <p>The Azure Database Administrator Associate certification focuses on managing and administering databases in Microsoft Azure. It covers tasks such as deploying, configuring, securing, and monitoring Azure SQL databases, as well as implementing backup and recovery strategies. The certification also prepares you to optimize database performance and manage high availability. Earning the DP-300 certification validates your expertise in database management and administration in Azure environments.
+</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="ACDDS">
+            <h2>Azure Consmos DB developer speciality</h2>
+            <p>The Azure Cosmos DB Developer Specialty certification focuses on developing and managing applications using Azure Cosmos DB, a globally distributed NoSQL database service. It covers tasks such as designing and implementing data models, working with APIs (like SQL, MongoDB, Cassandra), and ensuring scalability and performance. The certification also prepares you to manage Cosmos DB security, consistency, and integration with other Azure services. Earning the DP-420 certification demonstrates your expertise in building and maintaining applications using Azure Cosmos DB.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+
+        <div class="note-section" id="DCN">
+            <h2>Data Communication & Networking</h2>
+            <p>Data communication enables the transfer of information between devices.
+                Networking connects computers using protocols like TCP/IP and HTTP.
+                It includes LAN, WAN, and wireless communication technologies.
+                Used in the internet, cloud computing, and real-time communication.</p>
+            <a href="https://drive.google.com/file/d/1Dch5AmS46xt5Brhk_TQCU7yDV1aeOzwr/view?usp=drivesdk" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="Rdbms">
+            <h2>RDBMS</h2>
+            <p>RDBMS stores and manages data using tables with relationships.
+                It follows ACID properties for data consistency and integrity.
+                Common RDBMS examples include MySQL, PostgreSQL, and Oracle.
+                Used in web applications, banking, and enterprise systems.</p>
+            <a href="https://drive.google.com/file/d/1DJQbuCUFRwI8UFiilhY7LpgF3HFjbXaK/view?usp=drivesdk " download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="Python">
+            <h2>Python Programming</h2>
+            <p>Python is a high-level, versatile programming language.
+                It is widely used in web development, data science, and automation.
+                Key features include simplicity, readability, and extensive libraries.
+                Popular frameworks include Django, Flask, and TensorFlow.</p>
+            <a href="https://drive.google.com/file/d/1-292Ijb49h9P3AqGTuHIYQSJWXCRaZ19/view?usp=drivesdk " download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="CC">
+            <h2>Introduction to Cloud Computing</h2>
+            <p>Cloud computing delivers computing services over the internet.
+                It includes storage, databases, networking, and computing power.
+                Models include IaaS, PaaS, and SaaS for different needs.
+                Used in web hosting, data backup, and scalable applications.</p>
+            <a href="https://drive.google.com/file/d/1bDf-r3LULaSeQU7p2h-3h-j5M8kHkUeU/view?usp=drivesdk" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="ADEA">
+            <h2>Azure Data Engineer Associate</h2>
+            <p>The Azure Data Engineer Associate certification focuses on designing and implementing data solutions on Microsoft Azure. It covers key areas such as data storage, data processing, data security, and managing data pipelines using services like Azure Synapse Analytics, Azure Data Lake, and Azure SQL Database. The certification prepares you to implement ETL processes, optimize data systems, and ensure data integrity. Earning the DP-203 certification validates your expertise in building and managing scalable data solutions on the Azure platform.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="CDPS">
+            <h2>Customer Data platform speciality</h2>
+            <p>The Customer Data Platform (CDP) Specialty certification focuses on implementing and managing customer data solutions to unify and analyze customer data across multiple channels. It covers areas like data integration, customer insights, audience segmentation, and leveraging AI to enhance marketing strategies. The certification prepares you to use CDP tools to ensure data privacy, compliance, and improve personalized customer experiences. Earning the DP-420 (if available) or a similar certification demonstrates expertise in integrating and managing customer data platforms to drive business decisions.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="C#">
+            <h2>Programming in .NET using C#</h2>
+            <p>C# is a modern, object-oriented language developed by Microsoft.
+                .NET provides a framework for building web, desktop, and mobile applications.
+                It supports features like memory management, exception handling, and LINQ.
+                Commonly used for enterprise software, game development, and cloud applications.</p>
+            <a href="https://drive.google.com/file/d/1Luq3bD9V8KmIW7sjWqHV5TE7gk6E47aH/view?usp=drivesdk " download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="ML">
+            <h2>Machine Learning</h2>
+            <p>Machine Learning (ML) enables systems to learn from data and make predictions.
+                It includes supervised, unsupervised, and reinforcement learning techniques.
+                Common algorithms include decision trees, neural networks, and SVM.
+                Used in AI applications like recommendation systems, image recognition, and NLP.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="M&A">
+            <h2>Multimedia & Animation</h2>
+            <p>Multimedia combines text, images, audio, and video for digital content.
+                Animation creates motion graphics using 2D or 3D techniques.
+                Software like Adobe Photoshop, Blender, and Maya are commonly used.
+                It is widely applied in gaming, movies, education, and advertising.</p>
+            <a href="https://drive.google.com/file/d/1BSIFlB-RJgSbd-sO4QvPUq_t-vuUR41L/view?usp=drivesdk " download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="ADSA">
+            <h2>Azure Data Scientist Associate</h2>
+            <p>The Azure Data Scientist Associate certification focuses on applying data science techniques to solve business problems using Microsoft Azure. It covers areas such as preparing data, building machine learning models, and deploying AI solutions using Azure Machine Learning and other tools. The certification also focuses on evaluating model performance, optimizing algorithms, and ensuring scalability. Earning the DP-100 certification demonstrates your expertise in designing and implementing data science solutions on the Azure platform.
+   </p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+        <div class="note-section" id="AEDAA">
+            <h2>Azure Enterprise Data Analyst Associate</h2>
+            <p>The Azure Enterprise Data Analyst Associate certification focuses on analyzing and visualizing data within Microsoft Azure environments to drive business insights. It covers skills such as preparing and transforming data, creating interactive reports, and using Power BI and other Azure data services for analytics. The certification prepares you to work with large datasets, build dashboards, and integrate data from multiple sources for decision-making. Earning the DA-100 certification validates your ability to turn data into actionable insights within enterprise-level organizations.</p>
+            <a href="notes/web-development.pdf" download>Download PDF</a>
+            <input type="file" class="file-upload" id="upload-mathmatics">
+            <button onclick="uploadFile('upload-mathmatics')">Upload Answer</button>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2025 BCA Notes | All Rights Reserved</p>
+    </footer>
+    <script>
+        function filterSubjects() {
+            const input = document.getElementById('liveSearch');
+            const filter = input.value.toUpperCase();
+            const subjectList = document.getElementById('subjectList');
+            const subjects = subjectList.getElementsByTagName('li');
+
+            for (let i = 0; i < subjects.length; i++) {
+                const subject = subjects[i];
+                const txtValue = subject.textContent || subject.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    subject.style.display = "";
+                } else {
+                    subject.style.display = "none";
+                }
+            }
+        }
+
+        function uploadFile(inputId) {
+            const fileInput = document.getElementById(inputId);
+            const file = fileInput.files[0];
+            if (file) {
+                alert(`File "${file.name}" uploaded successfully for ${inputId.replace('upload-', '')}`);
+                // Here you would typically send the file to the server
+                // For example: uploadToServer(file, inputId);
+            } else {
+                alert("Please select a file first!");
+            }
+        }
+    </script>
+</body>
+</html>
